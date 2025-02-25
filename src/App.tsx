@@ -1,4 +1,5 @@
 import Products from './components/Products';
+import Cart from './components/Cart';
 
 
 const App = () => {
@@ -6,6 +7,7 @@ const App = () => {
     <div>
       <h1>FakeStore Shop</h1>
       <Products />
+      <Cart />
     </div>
   );
 };
