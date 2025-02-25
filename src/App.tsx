@@ -25,16 +25,16 @@ const App: React.FC = () => {
         <div>
           <h2>Welcome, {user.email}</h2>
           <Login /> {/* To provide a logout button */}
-        </div>
-      ) : (
-        <>
-          <Register />
-          <Login />
           <NavBar />
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="/Cart" element={<Cart />} />
           </Routes>
+        </div>
+      ) : (
+        <>
+          <Register />
+          <Login />
         </>
       )}
     </div>
