@@ -9,7 +9,7 @@ import { store } from "./redux/store";
 
 const queryClient = new QueryClient();
 
-// Use createRoot instead of render
+
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 root.render(
   <StrictMode>
