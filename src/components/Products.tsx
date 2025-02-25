@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartSlice';
-import CategoryDropdown from '../components/Categories';
+import CategoryDropdown from './CategoriesDropdown';
 
 type Product = {
   id: number;

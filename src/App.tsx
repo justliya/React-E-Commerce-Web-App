@@ -1,14 +1,16 @@
 import Products from './components/Products';
 import Cart from './components/Cart';
+import { Route, Routes } from "react-router-dom";
+import NavBar from "./components/NavBar";
 
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <div>
-      <h1>FakeStore Shop</h1>
-      <Products />
-      <Cart />
-    </div>
+  <><NavBar /><Routes>
+      <Route path="/" element={<Products />} />
+      <Route path="/Cart" element={<Cart />} />
+
+    </Routes></>
   );
 };
 
