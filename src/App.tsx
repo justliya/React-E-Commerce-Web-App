@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { auth } from "./firebaseConfig";
-import Register from "./components/Registration";
-import Login from "./components/Login";
+import AuthForm from "./components/AuthForm";
 import Products from "./pages/Products";
 import Cart from "./pages/Cart";
+import ProfilePage from "./pages/ProfilePage";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -39,18 +39,12 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/profile" element={<ProfilePage userId={user.uid} />} />
           </Routes>
         </Container>
       ) : (
         <Container className="d-flex justify-content-center align-items-center min-vh-100">
-          <Row className="w-100">
-            <Col md={6} className="d-flex justify-content-center">
-              <Login />
-            </Col>
-            <Col md={6} className="d-flex justify-content-center">
-              <Register />
-            </Col>
-          </Row>
+          <AuthForm />
         </Container>
       )}
     </div>
