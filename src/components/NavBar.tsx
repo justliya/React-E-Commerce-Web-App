@@ -44,6 +44,13 @@ const NavBar: React.FC<{ user: boolean }> = ({ user }) => {
               )}
             </Nav.Link>
 
+            {/* Profile Link - Only visible if user is logged in */}
+            {user && (
+              <Nav.Link as={Link} to="/profile" className="text-dark fw-bold">
+                Profile
+              </Nav.Link>
+            )}
+
             {/* Logout Button - Only visible if user is logged in */}
             {user && (
               <Button
