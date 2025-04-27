@@ -7,11 +7,7 @@ import { RootState } from "../redux/store";
 import CategoryDropdown from "../components/CategoriesDropdown";
 import { Card, Button, Container, Row, Col, Badge } from "react-bootstrap";
 import { auth, db } from "../firebaseConfig"; 
-
-import {
-  doc,
-  setDoc,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 // Define the Product type
 type Product = {
@@ -65,7 +61,6 @@ const Products = () => {
 
   const uid = useUserUid();
 
-
   const handleAddToCart = async (product: Product) => {
     if (!uid) {
       console.log("User not authenticated");
@@ -79,13 +74,8 @@ const Products = () => {
     };
 
     try {
-      
       const cartDocRef = doc(db, "carts", uid, "cartItems", product.id.toString());
       await setDoc(cartDocRef, cartProduct);
-
-      console.log("Successfully added to Firestore cart");
-
-      
       dispatch(reduxAddToCart(product));
     } catch (error) {
       console.error("Error adding to Firestore cart:", error);
@@ -108,8 +98,19 @@ const Products = () => {
   if (error) return <p>Error loading products</p>;
 
   return (
-    <Container>
-      <h2 className="text-center my-4">Products</h2>
+    <Container
+      fluid
+      style={{
+        backgroundColor: "#ffe6f0", // 🌸 Light Pink Background
+        minHeight: "100vh",
+        paddingTop: "20px",
+        paddingBottom: "20px",
+      }}
+    >
+      <h2 className="text-center my-4" style={{ fontWeight: "bold", color: "#333" }}>
+        Products
+      </h2>
+
       <CategoryDropdown onCategoryChange={setSelectedCategory} />
 
       <Row className="g-4 mt-3">
@@ -135,7 +136,6 @@ const Products = () => {
                     <Badge bg="info">{product.category}</Badge>
                   </Card.Text>
 
-                  {/* Expandable Description */}
                   <Card.Text>
                     {isExpanded
                       ? product.description
@@ -153,7 +153,6 @@ const Products = () => {
                     ⭐ {product.rating.rate}/5
                   </Card.Text>
 
-                  {/* Show quantity if added to cart */}
                   {quantity > 0 ? (
                     <Button variant="secondary" className="w-100" disabled>
                       Added to Cart ({quantity})

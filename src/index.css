@@ -4,7 +4,8 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgb(255, 160, 122);
+
   background-color: #242424;
 
   font-synthesis: none;
@@ -65,4 +66,98 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* --- Global Reset and Soft Look --- */
+body {
+  background-color: #f9f9f9;
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: #1a1a1a;
+}
+
+/* --- Navbar --- */
+.navbar {
+  background-color: #fff !important;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.nav-link {
+  margin-right: 1rem;
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: #ff5722 !important;
+}
+
+/* --- Buttons --- */
+button, .btn {
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #ff5722;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #e64a19;
+}
+
+.btn-info {
+  background-color: #03a9f4;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #f44336;
+  border: none;
+}
+
+/* --- Cards --- */
+.card {
+  border: none;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* --- Forms --- */
+.form-control {
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* --- List Group Items --- */
+.list-group-item {
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+/* --- Container --- */
+.container {
+  padding-top: 2rem;
+}
+
+/* --- Image Styling --- */
+.card-img {
+  object-fit: contain;
 }
