@@ -1,12 +1,13 @@
 import React from "react";
 import { Nav, Navbar, Container, Badge, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { FaShoppingCart } from "react-icons/fa";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebaseConfig";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 
 const NavBar: React.FC<{ user: boolean }> = ({ user }) => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -15,7 +16,7 @@ const NavBar: React.FC<{ user: boolean }> = ({ user }) => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/"); // Redirect after logout
+      navigate("/"); 
     } catch (error) {
       console.error("Logout error:", error);
     }

@@ -1,12 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/cartSlice";
+import { addToCart as reduxAddToCart } from "../redux/cartSlice";
 import { RootState } from "../redux/store";
 import CategoryDropdown from "../components/CategoriesDropdown";
 import { Card, Button, Container, Row, Col, Badge } from "react-bootstrap";
+import { auth, db } from "../firebaseConfig"; 
 
+import {
+  doc,
+  setDoc,
+} from "firebase/firestore";
+
+// Define the Product type
 type Product = {
   id: number;
   title: string;
@@ -18,7 +25,7 @@ type Product = {
   quantity: number;
 };
 
-// Fetch function
+// Fetch products
 const fetchProducts = async (category: string): Promise<Product[]> => {
   const url = category
     ? `https://fakestoreapi.com/products/category/${category}`
@@ -27,30 +34,69 @@ const fetchProducts = async (category: string): Promise<Product[]> => {
   return response.data;
 };
 
+// Hook to get current user's UID
+function useUserUid() {
+  const [uid, setUid] = useState<string | null>(null);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUid(user.uid);
+      } else {
+        setUid(null);
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
+  return uid;
+}
+
 const Products = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [expandedDescriptions, setExpandedDescriptions] = useState<{
-    [key: number]: boolean;
-  }>({});
+  const [expandedDescriptions, setExpandedDescriptions] = useState<{ [key: number]: boolean }>({});
 
   const { data, isLoading, error } = useQuery<Product[]>({
     queryKey: ["products", selectedCategory],
     queryFn: () => fetchProducts(selectedCategory),
   });
 
-  const handleAddToCart = (product: Product) => {
-    dispatch(addToCart(product));
+  const uid = useUserUid();
+
+
+  const handleAddToCart = async (product: Product) => {
+    if (!uid) {
+      console.log("User not authenticated");
+      return;
+    }
+
+    const cartProduct = {
+      ...product,
+      qty: 1,
+      TotalProductPrice: product.price * 1,
+    };
+
+    try {
+      
+      const cartDocRef = doc(db, "carts", uid, "cartItems", product.id.toString());
+      await setDoc(cartDocRef, cartProduct);
+
+      console.log("Successfully added to Firestore cart");
+
+      
+      dispatch(reduxAddToCart(product));
+    } catch (error) {
+      console.error("Error adding to Firestore cart:", error);
+    }
   };
 
-  // Get the quantity of a product in the cart
   const getProductQuantity = (productId: number) => {
     const item = cartItems.find((item) => item.id === productId);
     return item ? item.quantity : 0;
   };
 
-  // Toggle description expansion
   const toggleDescription = (id: number) => {
     setExpandedDescriptions((prevState) => ({
       ...prevState,
