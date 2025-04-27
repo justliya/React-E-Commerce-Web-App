@@ -4,7 +4,7 @@ import { db } from '../firebaseConfig';
 import { collection, addDoc } from 'firebase/firestore';
 
 interface User {
-  id?: string; // id is optional, as it will only be available after data is fetched
+  id?: string; 
   name: string;
   age: number;
 }
