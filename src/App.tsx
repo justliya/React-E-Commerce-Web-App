@@ -8,6 +8,7 @@ import ProfilePage from "./pages/ProfilePage";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./components/NavBar";
 import { Container, Spinner } from "react-bootstrap";
+import ManageProducts from "./pages/ManageProducts"; // <-- add this
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -40,6 +41,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/profile" element={<ProfilePage userId={user.uid} />} />
+            <Route path="/manage-products" element={<ManageProducts />} />
           </Routes>
         </Container>
       ) : (
