@@ -1,66 +1,46 @@
-import React from "react";
-import { Nav, Navbar, Container, Badge, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { FaShoppingCart } from "react-icons/fa";
-import { signOut } from "firebase/auth";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../firebaseConfig";
-import { useNavigate} from "react-router-dom";
 
-const NavBar: React.FC<{ user: boolean }> = ({ user }) => {
-  const cartItems = useSelector((state: RootState) => state.cart.items);
+interface NavBarProps {
+  user: boolean;
+}
+
+const NavBar = ({ user }: NavBarProps) => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await signOut(auth);
-      navigate("/"); 
+      await auth.signOut();
+      navigate("/");
     } catch (error) {
-      console.error("Logout error:", error);
+      console.error("Error logging out:", error);
     }
   };
 
   return (
-    <Navbar bg="warning" variant="dark" expand="lg" className="shadow-sm p-3">
+    <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand as={Link} to="/" className="fw-bold text-dark">
-          Brand New
+        <Navbar.Brand as={Link} to="/">
+          Ecommerce Web App
         </Navbar.Brand>
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto d-flex align-items-center">
-            <Nav.Link as={Link} to="/" className="text-dark fw-bold">
-              Home
-            </Nav.Link>
-
-            <Nav.Link as={Link} to="/cart" className="text-dark fw-bold">
-              <FaShoppingCart size={20} /> Cart
-              {cartItems.length > 0 && (
-                <Badge pill bg="danger" className="ms-1">
-                  {cartItems.length}
-                </Badge>
-              )}
-            </Nav.Link>
-
-            {/* Profile Link - Only visible if user is logged in */}
-            {user && (
-              <Nav.Link as={Link} to="/profile" className="text-dark fw-bold">
-                Profile
-              </Nav.Link>
-            )}
-
-            {/* Logout Button - Only visible if user is logged in */}
-            {user && (
-              <Button
-                variant="outline-dark"
-                className="ms-3 fw-bold"
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
+          <Nav className="ms-auto">
+            {user ? (
+              <>
+                <Nav.Link as={Link} to="/">Products</Nav.Link>
+                <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
+                <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
+                <Nav.Link as={Link} to="/manage-products">Manage Products</Nav.Link> {/* 🔥 New */}
+                <Button variant="outline-danger" size="sm" onClick={handleLogout} className="ms-2">
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                {/* Optional: If you want special links for guests */}
+              </>
             )}
           </Nav>
         </Navbar.Collapse>
