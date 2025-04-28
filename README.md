@@ -1,48 +1,68 @@
-# 🛒 React Redux Shopping Cart with React Query & Bootstrap
+🛍️ Brand New – E-Commerce Web App
 
-**Eccomerce Web App**
+Brand New is a fully functional E-Commerce Web Application built using React, Redux Toolkit, React Query, Firebase, and Bootstrap.
+It allows users to browse, filter, manage carts, place orders, and view order history, providing a seamless shopping experience.
 
-This is a **Eccomerce Web App** built with **React, Redux Toolkit, React Query, Axios, and Bootstrap**.  
-It fetches products from **FakeStoreAPI**, allowing users to browse categories, add/remove items from the cart, and proceed to checkout.  
-The cart state is managed globally using **Redux Toolkit**, and data fetching is optimized using **React Query**.
+⸻
 
----
+✨ Features
 
-##  **Features**
-✔ **Product Listing** – Displays all products fetched dynamically from FakeStoreAPI  
-✔ **Category Filtering** – Users can filter products by category using a dropdown  
-✔ **Cart Management** – Users can add, update, and remove products from the shopping cart  
-✔ **Session Persistence** – Cart state is stored in `sessionStorage` for persistence  
-✔ **Checkout Simulation** – Users can complete a purchase (cart clears after checkout)  
-✔ **Responsive Design** – Uses Bootstrap to ensure a seamless experience on all screen sizes  
-✔ **Optimized API Requests** – Uses React Query for efficient caching and re-fetching  
+✔ Product Listing – Browse products dynamically fetched from FakeStoreAPI
+✔ Category Filtering – Filter products by specific categories
+✔ Cart Management – Add, update, and remove items from the cart
+✔ Real-Time Cart Persistence – Cart saved per user using Firebase Firestore
+✔ User Authentication – Login/Register functionality with Firebase Auth
+✔ Profile Management – Users can update or delete their profile information
+✔ Checkout and Orders – Checkout clears the cart and saves order history
+✔ Order History – Users can view all past orders
+✔ Responsive Design – Fully mobile-friendly with React Bootstrap
+✔ Optimized API Requests – Leveraging React Query for caching and re-fetching
+✔ Continuous Deployment – GitHub Actions automatically deploys to Vercel
 
----
+⸻
 
-## 🛠 **Technologies Used**
-- **React** – UI development  
-- **Redux Toolkit** – Global state management for cart functionality  
-- **React Query** – Fetching & caching API data  
-- **Axios** – Handling API requests  
-- **Bootstrap (React-Bootstrap)** – Styling & responsiveness  
-- **FakeStoreAPI** – Provides mock product data  
+🛠 Technologies Used
+	•	React – Frontend development
+	•	Redux Toolkit – State management (cart, orders)
+	•	React Query – API data fetching & caching
+	•	Axios – Making HTTP requests
+	•	Firebase Authentication – Secure user login & registration
+	•	Firebase Firestore – Real-time database for cart and orders
+	•	Vercel – Deployment platform
+	•	Bootstrap / React-Bootstrap – Styling and responsiveness
+	•	GitHub Actions – CI/CD pipelines
 
----
+⸻
 
-## 🔧 **Installation & Setup**
-### **1️⃣ Clone the Repository**
-```bash
-git clone https://github.com/your-username/shopping-cart-app.git
-cd shopping-cart-app
+
+
+Visit the Live App on Vercel
+
+https://react-e-commerce-bice-tau.vercel.app/
+
+
+⸻
+
+🚀 Installation & Setup
+
+1️⃣ Clone the Repository
+
+git clone https://github.com/your-username/brand-new-ecommerce.git
+cd brand-new-ecommerce
+
+2️⃣ Install Dependencies
 
 npm install
+
+3️⃣ Start the Development Server
 
 npm run dev
 
 
-🛠 API Reference
 
-FakeStoreAPI – https://fakestoreapi.com
-	•	Get all products: https://fakestoreapi.com/products
-	•	Get categories: https://fakestoreapi.com/products/categories
-	•	Get products by category: https://fakestoreapi.com/products/category/{category}
+👩‍💻 Author
+
+Aaliyah Johnson
+
+
+
