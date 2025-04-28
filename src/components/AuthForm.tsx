@@ -1,5 +1,8 @@
 import { useState, FormEvent } from "react";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { Form, Button, Card, Alert } from "react-bootstrap";
 
@@ -21,7 +24,11 @@ const AuthForm = () => {
         alert("Registration successful!");
       }
     } catch {
-      setError(isLogin ? "Invalid email or password. Please try again." : "Registration error. Please try again.");
+      setError(
+        isLogin
+          ? "Invalid email or password. Please try again."
+          : "Registration error. Please try again."
+      );
     }
   };
 
@@ -32,8 +39,9 @@ const AuthForm = () => {
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
-            <Form.Label>Email</Form.Label>
+            <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control
+              id="email" // 👈 add this!
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -41,9 +49,11 @@ const AuthForm = () => {
               required
             />
           </Form.Group>
+
           <Form.Group className="mb-3">
-            <Form.Label>Password</Form.Label>
+            <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
+              id="password" 
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -51,7 +61,11 @@ const AuthForm = () => {
               required
             />
           </Form.Group>
-          <Button variant={isLogin ? "primary" : "success"} type="submit" className="w-100">
+          <Button
+            variant={isLogin ? "primary" : "success"}
+            type="submit"
+            className="w-100"
+          >
             {isLogin ? "Login" : "Register"}
           </Button>
         </Form>
