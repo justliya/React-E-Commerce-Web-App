@@ -41,8 +41,7 @@ describe("Cart Integration Test", () => {
         <Cart />
       </Provider>
     );
-
-    // ⏳ Wait until Spinner disappears
+    
     await waitFor(() => {
       expect(screen.queryByRole("status")).not.toBeInTheDocument();
     });

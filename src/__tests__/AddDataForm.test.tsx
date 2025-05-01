@@ -6,7 +6,7 @@ jest.mock("../firebaseConfig", () => ({
   db: {}, 
 }));
 
-// 🔥 Mock Firestore addDoc
+
 jest.mock("firebase/firestore", () => ({
   addDoc: jest.fn(),
   collection: jest.fn(),
