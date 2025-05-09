@@ -3,8 +3,9 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebaseConfig";
+import { auth, db } from "../firebaseConfig";
 import { Form, Button, Card, Alert } from "react-bootstrap";
+import { doc, setDoc } from "firebase/firestore";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);
@@ -20,7 +21,20 @@ const AuthForm = () => {
         await signInWithEmailAndPassword(auth, email, password);
         alert("Login successful!");
       } else {
-        await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+
+       // firestore user collection
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          email: user.email,
+          createdAt: new Date().toISOString(),
+        });
+
         alert("Registration successful!");
       }
     } catch {
@@ -41,7 +55,7 @@ const AuthForm = () => {
           <Form.Group className="mb-3">
             <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control
-              id="email" // 👈 add this!
+              id="email"
               type="email"
               placeholder="Enter your email"
               value={email}
@@ -53,7 +67,7 @@ const AuthForm = () => {
           <Form.Group className="mb-3">
             <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
-              id="password" 
+              id="password"
               type="password"
               placeholder="Enter your password"
               value={password}
@@ -61,6 +75,7 @@ const AuthForm = () => {
               required
             />
           </Form.Group>
+
           <Button
             variant={isLogin ? "primary" : "success"}
             type="submit"
@@ -69,6 +84,7 @@ const AuthForm = () => {
             {isLogin ? "Login" : "Register"}
           </Button>
         </Form>
+
         <div className="mt-3 text-center">
           {isLogin ? (
             <p>
